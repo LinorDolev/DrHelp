@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">DrHelp</string>
+
+    <string name="email">Enter your Email</string>
+    <string name="password">Enter your Password</string>
+    <string name="login">Login</string>
+    <string name="register_link">New to DrHelp? Register here!</string>
+    <string name="forgot_password_link">Forgot your Password?</string>
+    <string name="firstName">Enter your First Name</string>
+    <string name="lastName">Enter your Last Name</string>
+    <string name="register">Register</string>
+
+</resources>
