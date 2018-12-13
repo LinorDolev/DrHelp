@@ -9,5 +9,5 @@
     <string name="firstName">Enter your First Name</string>
     <string name="lastName">Enter your Last Name</string>
     <string name="register">Register</string>
-
+    <string name="dateOfBirth">Enter your Date of birth</string>
 </resources>
