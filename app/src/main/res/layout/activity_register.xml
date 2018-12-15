@@ -72,15 +72,6 @@
                 android:hint="@string/password"
                 android:textSize="20sp"/>
 
-            <!--  Date Label -->
-            <EditText
-                android:id="@+id/dateOfBirth_editText_register"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dip"
-                android:singleLine="true"
-                android:hint="@string/dateOfBirth"
-                android:textSize="20sp" />
 
             <!-- Register Button -->
             <Button android:id="@+id/btn_register"
