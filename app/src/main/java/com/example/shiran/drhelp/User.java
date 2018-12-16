@@ -1,6 +1,6 @@
 package com.example.shiran.drhelp;
 
-public class UserEntity {
+public class User {
 
     private final Boolean AVAILABLE = true;
     private final String LANGUAGE = "English";
@@ -13,11 +13,11 @@ public class UserEntity {
     private Boolean available;
     private String language;
 
-    public UserEntity() {
+    public User() {
     }
 
-    public UserEntity(String id, String firstName, String lastName,
-                      String email, String password) {
+    public User(String id, String firstName, String lastName,
+                String email, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -27,8 +27,8 @@ public class UserEntity {
         this.language = LANGUAGE;
     }
 
-    public UserEntity(String id, String firstName, String lastName,
-                      String email, String password, Boolean available, String language) {
+    public User(String id, String firstName, String lastName,
+                String email, String password, Boolean available, String language) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -96,7 +96,7 @@ public class UserEntity {
 
     @Override
     public String toString() {
-        return "UserEntity{" +
+        return "User{" +
                 "id='" + id + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
