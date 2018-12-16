@@ -25,6 +25,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText editText_userEmail;
     private EditText editText_userPassword;
     private Button button_Register;
+    private Intent intent_toLogin;
 
     //--datebase--//
     private FirebaseDatabase firebaseDatabase;
@@ -115,7 +116,9 @@ public class RegisterActivity extends AppCompatActivity {
                     databaseReference.child(userId).setValue(user);
                     Toast.makeText(RegisterActivity.this, "Registration succeeded."
                             , Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+
+                    intent_toLogin = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(intent_toLogin);
                     finish();
                     Log.d("create-user:", "create user succeeded.");
                 }

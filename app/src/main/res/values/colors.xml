@@ -3,4 +3,8 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#d81b60</color>
+
+    //--DrHelp Color--//
+    <color name="colorRegularTextDark">#000000</color>
+    <color name="colorRegularTextLight">#6b6b6b</color>
 </resources>

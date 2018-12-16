@@ -36,7 +36,9 @@
                 android:layout_marginBottom="20dip"
                 android:singleLine="true"
                 android:hint="@string/firstName"
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                android:textColorHint="@color/colorRegularTextLight"
+                android:textColor="@color/colorRegularTextDark"/>
 
             <!--  Last name Label -->
             <EditText
@@ -47,7 +49,9 @@
                 android:layout_marginBottom="20dip"
                 android:singleLine="true"
                 android:hint="@string/lastName"
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                android:textColorHint="@color/colorRegularTextLight"
+                android:textColor="@color/colorRegularTextDark"/>
 
             <!--  Email Label -->
             <EditText
@@ -58,7 +62,9 @@
                 android:layout_marginBottom="20dip"
                 android:singleLine="true"
                 android:hint="@string/email"
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                android:textColorHint="@color/colorRegularTextLight"
+                android:textColor="@color/colorRegularTextDark"/>
 
             <!--  Password Label -->
             <EditText
@@ -70,7 +76,9 @@
                 android:singleLine="true"
                 android:inputType="textPassword"
                 android:hint="@string/password"
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                android:textColorHint="@color/colorRegularTextLight"
+                android:textColor="@color/colorRegularTextDark"/>
 
 
             <!-- Register Button -->
@@ -85,11 +93,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dip"
-                android:layout_marginBottom="40dip"
+                android:layout_marginBottom="60dip"
                 android:text="Already has account! Login here"
                 android:gravity="center"
                 android:textSize="20dip"
-                android:textColor="#025f7c"/>
+                android:textColor="@color/colorRegularTextDark"/>
 
         </LinearLayout>
         <!-- Registration Form Ends -->

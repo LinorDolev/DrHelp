@@ -37,7 +37,9 @@
                 android:layout_marginBottom="20dip"
                 android:singleLine="true"
                 android:hint="@string/email"
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                android:textColorHint="@color/colorRegularTextLight"
+                android:textColor="@color/colorRegularTextDark"/>
 
             <!--  Password Label -->
             <EditText
@@ -48,7 +50,9 @@
                 android:singleLine="true"
                 android:inputType="textPassword"
                 android:hint="@string/password"
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                android:textColorHint="@color/colorRegularTextLight"
+                android:textColor="@color/colorRegularTextDark"/>
 
             <!-- Login button -->
             <Button
@@ -65,7 +69,7 @@
 
             <!-- Link to Reset Password -->
             <TextView
-                android:id="@+id/forgot_password"
+                android:id="@+id/link_forgot_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dip"
@@ -74,7 +78,7 @@
                 android:text="@string/forgot_password_link"
                 android:gravity="center"
                 android:textSize="20dip"
-                android:textColor="@android:color/black"/>
+                android:textColor="@color/colorRegularTextDark"/>
 
             <!-- Link to Registration Screen -->
             <TextView
@@ -82,12 +86,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dip"
-                android:layout_marginBottom="40dip"
+                android:layout_marginBottom="60dip"
                 android:layout_gravity="center"
                 android:text="@string/register_link"
                 android:gravity="center"
                 android:textSize="20dip"
-                android:textColor="@android:color/black"/>
+                android:textColor="@color/colorRegularTextDark"/>
 
         </LinearLayout>
         <!-- Login Form Ends -->
