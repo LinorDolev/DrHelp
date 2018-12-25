@@ -29,55 +29,57 @@
             android:layout_marginTop="40dp">
 
             <!--  Email Label -->
-            <EditText
-                android:id="@+id/email_editText_login"
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dip"
-                android:layout_marginBottom="20dip"
-                android:singleLine="true"
-                android:hint="@string/email"
-                android:textSize="20sp"
-                android:textColorHint="@color/colorRegularTextLight"
-                android:textColor="@color/colorRegularTextDark"/>
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/email_editText_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dip"
+                    android:layout_marginBottom="20dip"
+                    android:singleLine="true"
+                    android:hint="@string/email"
+                    android:textSize="20sp" />
+            </android.support.design.widget.TextInputLayout>
 
             <!--  Password Label -->
-            <EditText
-                android:id="@+id/password_editText_login"
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dip"
-                android:singleLine="true"
-                android:inputType="textPassword"
-                android:hint="@string/password"
-                android:textSize="20sp"
-                android:textColorHint="@color/colorRegularTextLight"
-                android:textColor="@color/colorRegularTextDark"/>
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/password_editText_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dip"
+                    android:singleLine="true"
+                    android:inputType="textPassword"
+                    android:hint="@string/password"
+                    android:textSize="20sp"/>
+            </android.support.design.widget.TextInputLayout>
 
             <!-- Login button -->
-            <Button
+            <android.support.design.button.MaterialButton
                 android:id="@+id/btn_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dip"
-                android:background="@android:color/background_light"
-                android:text="@string/login"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                tools:textColor="@android:color/black" />
+                android:text="@string/login" />
 
             <!-- Link to Reset Password -->
             <TextView
                 android:id="@+id/link_forgot_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dip"
+                android:layout_marginTop="25dip"
                 android:layout_marginBottom="10dip"
                 android:layout_gravity="center"
                 android:text="@string/forgot_password_link"
                 android:gravity="center"
-                android:textSize="20dip"
+                android:textSize="15sp"
                 android:textColor="@color/colorRegularTextDark"/>
 
             <!-- Link to Registration Screen -->
@@ -85,12 +87,12 @@
                 android:id="@+id/link_to_register"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dip"
+                android:layout_marginTop="5dip"
                 android:layout_marginBottom="60dip"
                 android:layout_gravity="center"
                 android:text="@string/register_link"
                 android:gravity="center"
-                android:textSize="20dip"
+                android:textSize="15sp"
                 android:textColor="@color/colorRegularTextDark"/>
 
         </LinearLayout>

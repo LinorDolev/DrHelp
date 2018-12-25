@@ -3,12 +3,12 @@ package com.example.shiran.drhelp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.button.MaterialButton;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -20,14 +20,14 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText editText_userFirstName;
-    private EditText editText_userLastName;
-    private EditText editText_userEmail;
-    private EditText editText_userPassword;
-    private Button button_Register;
+    private TextInputEditText editText_userFirstName;
+    private TextInputEditText editText_userLastName;
+    private TextInputEditText editText_userEmail;
+    private TextInputEditText editText_userPassword;
+    private MaterialButton button_Register;
     private Intent intent_toLogin;
 
-    //--datebase--//
+    //--database--//
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private FirebaseAuth firebaseAuth;
