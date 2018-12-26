@@ -1,4 +1,4 @@
-package com.example.shiran.drhelp;
+package com.example.shiran.drhelp.entities;
 
 public class User {
 
