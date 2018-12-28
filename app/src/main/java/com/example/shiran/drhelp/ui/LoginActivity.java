@@ -1,11 +1,10 @@
 package com.example.shiran.drhelp.ui;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
+import android.os.Bundle;
 import android.support.design.button.MaterialButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -13,12 +12,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.shiran.drhelp.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.shiran.drhelp.services.FirebaseUserService;
+import com.example.shiran.drhelp.services.UserService;
+import com.example.shiran.drhelp.services.observers.UserLoginObserver;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements UserLoginObserver {
 
     private TextInputEditText editText_userEmail;
     private TextInputEditText editText_userPassword;
@@ -30,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     private Intent intent_toMember;
     private Intent intent_toResetPassword;
 
-    private FirebaseAuth firebaseAuth;
+    private UserService userService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +36,13 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         initLoginReferences();
-        needToRegister();
-        login();
-        forgotMyPassword();
+
+        userService = FirebaseUserService.getInstance();
+        userService.setUserLoginObserver(this);
+
+        textView_toRegister.setOnClickListener(this::onNeedToRegisterPressed);
+        button_login.setOnClickListener(this::onLoginButtonPressed);
+        textView_forgotMyPassword.setOnClickListener(this::onForgotMyPasswordButtonPressed);
     }
 
     private void initLoginReferences() {
@@ -49,52 +51,26 @@ public class LoginActivity extends AppCompatActivity {
         textView_forgotMyPassword = findViewById(R.id.link_forgot_password);
         textView_toRegister = findViewById(R.id.link_to_register);
         button_login = findViewById(R.id.btn_login);
-        firebaseAuth = FirebaseAuth.getInstance();
     }
 
-    private void needToRegister() {
-        textView_toRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent_toRegister = new Intent(getApplicationContext(), RegisterActivity.class);
-                startActivity(intent_toRegister);
-            }
-        });
+    private void onNeedToRegisterPressed(View view) {
+        intent_toRegister = new Intent(getApplicationContext(), RegistrationActivity.class);
+        startActivity(intent_toRegister);
     }
 
-    private void login() {
-        button_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String email = editText_userEmail.getText().toString().trim();
-                String password = editText_userPassword.getText().toString().trim();
+    private void onLoginButtonPressed(View view) {
+        String email = editText_userEmail.getText().toString().trim();
+        String password = editText_userPassword.getText().toString().trim();
 
-                if (!isValidForm(email, password))
-                    return;
+        if (!isValidForm(email, password))
+            return;
 
-                userAuthentication(email, password);
-            }
-        });
+        userService.loginUser(email, password, this);
     }
 
-    private void userAuthentication(String email, String password) {
-        firebaseAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(!task.isSuccessful()){
-                            Toast.makeText(LoginActivity.this, "Authentication failed.\n"
-                                    + "check your email and password or sign up"
-                                    , Toast.LENGTH_SHORT).show();
-                            Log.d("login:", "Authentication failed.");
-                        } else{
-                            intent_toMember = new Intent(getApplicationContext(), MemberActivity.class);
-                            startActivity(intent_toMember);
-                            Log.d("login:", "Authentication succeeded.");
-                            finish();
-                        }
-                    }
-                });
+    private void onForgotMyPasswordButtonPressed(View view) {
+        intent_toResetPassword = new Intent(getApplicationContext(), ResetPasswordActivity.class);
+        startActivity(intent_toResetPassword);
     }
 
     private boolean isValidForm(String email, String password) {
@@ -109,14 +85,19 @@ public class LoginActivity extends AppCompatActivity {
         return true;
     }
 
-    private void forgotMyPassword() {
-        textView_forgotMyPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent_toResetPassword = new Intent(getApplicationContext(), ResetPasswordActivity.class);
-                startActivity(intent_toResetPassword);
-            }
-        });
+    @Override
+    public void onLoginSucceed() {
+        intent_toMember = new Intent(getApplicationContext(), MemberActivity.class);
+        startActivity(intent_toMember);
+        Log.d("login:", "Authentication succeeded.");
+        finish();
+    }
 
+    @Override
+    public void onLoginFailed() {
+        Toast.makeText(LoginActivity.this, "Authentication failed.\n"
+                        + "check your email and password or sign up"
+                , Toast.LENGTH_SHORT).show();
+        Log.d("login:", "Authentication failed.");
     }
 }

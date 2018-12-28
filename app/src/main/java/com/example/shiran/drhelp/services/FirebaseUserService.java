@@ -2,6 +2,7 @@ package com.example.shiran.drhelp.services;
 
 
 import android.app.Activity;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.example.shiran.drhelp.entities.RegistrationForm;
@@ -13,6 +14,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class FirebaseUserService extends UserServiceObservable {
+
+    /** Singleton **/
+    private static FirebaseUserService instance;
+
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private FirebaseAuth firebaseAuth;
@@ -22,6 +27,15 @@ public class FirebaseUserService extends UserServiceObservable {
         databaseReference = firebaseDatabase.getReference("users");
         firebaseAuth = FirebaseAuth.getInstance();
     }
+
+    /** Singleton **/
+    public static UserService getInstance(){
+        if(instance == null){
+            instance = new FirebaseUserService();
+        }
+        return instance;
+    }
+
     @Override
     public void registerUser(final RegistrationForm registrationForm, final Activity activity) {
         firebaseAuth.createUserWithEmailAndPassword(
@@ -32,7 +46,7 @@ public class FirebaseUserService extends UserServiceObservable {
 
     private void onRegistrationComplete(final Task<AuthResult> task, RegistrationForm registrationForm){
         if(!task.isSuccessful()){
-            publish(observer -> {
+            publishAboutRegistration(observer -> {
                 observer.onUserRegistrationFailed(task.getException());
                 return null;
             });
@@ -54,7 +68,7 @@ public class FirebaseUserService extends UserServiceObservable {
             Log.d("User1", user.toString());
             databaseReference.child(user.getId()).setValue(user);
             Log.d("User", databaseReference.child(userId).toString());
-            publish(observer -> {
+            publishAboutRegistration(observer -> {
                 observer.onUserRegistrationSucceed(user);
                 return null;
             });
@@ -62,8 +76,39 @@ public class FirebaseUserService extends UserServiceObservable {
     }
 
     @Override
-    public User loginUser(String email, String password) {
-        return null;
+    public void loginUser(String email, String password, Activity activity) {
+        firebaseAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(activity, this::onLogginInCompleted);
+    }
+
+    private void onLogginInCompleted(@NonNull Task<AuthResult> task) {
+        if(!task.isSuccessful()){
+            publishAboutLoggingIn(observer -> {observer.onLoginFailed();
+            return null;
+            });
+        } else {
+            publishAboutLoggingIn(observer -> {observer.onLoginSucceed();
+            return null;
+            });
+        }
+    }
+
+    @Override
+    public void resetPassword(String email) {
+        firebaseAuth.sendPasswordResetEmail(email)
+                .addOnCompleteListener(this::onResetPasswordCompleted);
+    }
+
+    private void onResetPasswordCompleted(@NonNull Task<Void> task) {
+        if(!task.isSuccessful()){
+            publishAboutResetPassword(observer -> {observer.onResetPasswordFailed();
+                return null;
+            });
+        } else {
+            publishAboutResetPassword(observer -> {observer.onResetPasswordSucceed();
+                return null;
+            });
+        }
     }
 
     @Override

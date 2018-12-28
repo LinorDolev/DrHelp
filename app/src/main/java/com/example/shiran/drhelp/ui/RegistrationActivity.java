@@ -2,7 +2,6 @@ package com.example.shiran.drhelp.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.button.MaterialButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
@@ -15,16 +14,10 @@ import com.example.shiran.drhelp.R;
 import com.example.shiran.drhelp.entities.RegistrationForm;
 import com.example.shiran.drhelp.entities.User;
 import com.example.shiran.drhelp.services.FirebaseUserService;
-import com.example.shiran.drhelp.services.queries.UserRegistrationObserver;
-import com.example.shiran.drhelp.services.queries.UserService;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.example.shiran.drhelp.services.observers.UserRegistrationObserver;
+import com.example.shiran.drhelp.services.UserService;
 
-public class RegisterActivity extends AppCompatActivity implements UserRegistrationObserver {
+public class RegistrationActivity extends AppCompatActivity implements UserRegistrationObserver {
 
     private TextInputEditText editText_userFirstName;
     private TextInputEditText editText_userLastName;
@@ -32,25 +25,17 @@ public class RegisterActivity extends AppCompatActivity implements UserRegistrat
     private TextInputEditText editText_userPassword;
     private MaterialButton button_Register;
     private Intent intent_toLogin;
-
-    //--database--//
-    private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference databaseReference;
-    private FirebaseAuth firebaseAuth;
     private UserService userService;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_registration);
 
         initRegistrationReferences();
-        //initDatabaseComponents();
         userService = new FirebaseUserService();
+        userService.setUserRegistrationObserver(this);
         button_Register.setOnClickListener(this::onRegistrationButtonClicked);
-        //registerUser();
-
     }
 
     private void onRegistrationButtonClicked(View view) {
@@ -61,6 +46,7 @@ public class RegisterActivity extends AppCompatActivity implements UserRegistrat
 
         RegistrationForm registrationForm = new RegistrationForm(
                 firstName, lastName, email, password);
+
         if(!isValidForm(registrationForm)){
             Log.d("register-user:", "invalid form.");
             return;
@@ -76,32 +62,6 @@ public class RegisterActivity extends AppCompatActivity implements UserRegistrat
         editText_userPassword = findViewById(R.id.password_editText_register);
         button_Register = findViewById(R.id.btn_register);
     }
-
-    private void initDatabaseComponents() {
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("users");
-        firebaseAuth = FirebaseAuth.getInstance();
-    }
-
-   /* private void registerUser(){
-        button_Register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String firstName = editText_userFirstName.getText().toString().trim();
-                String lastName = editText_userLastName.getText().toString().trim();
-                String email = editText_userEmail.getText().toString().trim();
-                String password = editText_userPassword.getText().toString().trim();
-
-                if(!isValidForm(firstName, lastName, email, password)){
-                    Log.d("register-user:", "invalid form.");
-                    return;
-                }
-
-                Log.d("register-user:", "valid form.");
-                createUser(firstName, lastName, email, password);
-            }
-        });
-    }*/
 
     private boolean isValidForm(RegistrationForm registrationForm) {
 
@@ -125,35 +85,8 @@ public class RegisterActivity extends AppCompatActivity implements UserRegistrat
         return true;
     }
 
-    /*private void createUser(final String firstName, final String lastName, final String email, final String password) {
-        firebaseAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(
-                        this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(!task.isSuccessful()){
-                    Toast.makeText(RegisterActivity.this, "Authentication failed."
-                            + task.getException(), Toast.LENGTH_SHORT).show();
-                    Log.d("create-user:", "Authentication failed.");
-                } else {
-                    String userId  = firebaseAuth.getUid();
-                    User user = new User(userId, firstName, lastName, email, password);
-                    databaseReference.child(userId).setValue(user);
-                    Toast.makeText(RegisterActivity.this, "Registration succeeded."
-                            , Toast.LENGTH_SHORT).show();
-
-                    intent_toLogin = new Intent(getApplicationContext(), LoginActivity.class);
-                    startActivity(intent_toLogin);
-                    finish();
-                    Log.d("create-user:", "create user succeeded.");
-                }
-            }
-        });
-    }*/
-
-    @Override
     public void onUserRegistrationSucceed(User user) {
-        Toast.makeText(RegisterActivity.this, "Registration succeeded."
+        Toast.makeText(RegistrationActivity.this, "Registration succeeded."
                 , Toast.LENGTH_SHORT).show();
         intent_toLogin = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent_toLogin);
@@ -163,7 +96,7 @@ public class RegisterActivity extends AppCompatActivity implements UserRegistrat
 
     @Override
     public void onUserRegistrationFailed(Exception exception) {
-        Toast.makeText(RegisterActivity.this, "Authentication failed."
+        Toast.makeText(RegistrationActivity.this, "Authentication failed."
                 + exception, Toast.LENGTH_SHORT).show();
         Log.d("create-user:", "Authentication failed.");
     }
