@@ -24,7 +24,6 @@ public class RegistrationActivity extends AppCompatActivity implements UserRegis
     private TextInputEditText editText_userEmail;
     private TextInputEditText editText_userPassword;
     private MaterialButton button_Register;
-    private Intent intent_toLogin;
     private UserService userService;
 
     @Override
@@ -88,7 +87,7 @@ public class RegistrationActivity extends AppCompatActivity implements UserRegis
     public void onUserRegistrationSucceed(User user) {
         Toast.makeText(RegistrationActivity.this, "Registration succeeded."
                 , Toast.LENGTH_SHORT).show();
-        intent_toLogin = new Intent(getApplicationContext(), LoginActivity.class);
+        Intent intent_toLogin = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent_toLogin);
         finish();
         Log.d("create-user:", "create user succeeded.");

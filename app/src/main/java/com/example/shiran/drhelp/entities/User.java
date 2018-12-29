@@ -2,7 +2,7 @@ package com.example.shiran.drhelp.entities;
 
 public class User {
 
-    private final Boolean AVAILABLE = true;
+    private final Boolean AVAILABLE = false;
     private final String LANGUAGE = "English";
 
     private String id;

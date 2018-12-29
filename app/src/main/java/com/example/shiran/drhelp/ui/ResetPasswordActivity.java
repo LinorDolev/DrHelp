@@ -19,7 +19,6 @@ public class ResetPasswordActivity extends AppCompatActivity implements UserRese
 
     private TextInputEditText editText_userEmail;
     private MaterialButton button_resetPassword;
-    private Intent intent_toLogin;
     private UserService userService;
 
     @Override
@@ -61,7 +60,7 @@ public class ResetPasswordActivity extends AppCompatActivity implements UserRese
         Toast.makeText(ResetPasswordActivity.this,
                 "We have sent you instructions to reset your password!",
                 Toast.LENGTH_SHORT).show();
-        intent_toLogin = new Intent(getApplicationContext(), LoginActivity.class);
+        Intent intent_toLogin = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent_toLogin);
         Log.d("Reset-Password:", "Reset Password succeeded.");
         finish();

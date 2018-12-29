@@ -8,6 +8,8 @@ import com.example.shiran.drhelp.services.observers.UserLoginObserver;
 import com.example.shiran.drhelp.services.observers.UserRegistrationObserver;
 import com.example.shiran.drhelp.services.observers.UserResetPasswordObserver;
 
+import java.util.List;
+
 public interface UserService {
     void registerUser(RegistrationForm registrationForm, Activity activity);
 
@@ -22,6 +24,16 @@ public interface UserService {
     void logout(User user);
 
     void setUserResetPasswordObserver(UserResetPasswordObserver userResetPasswordObserver);
+
+    String getUserStatuse();
+
+    void setUserStatuse(boolean available);
+
+    int getNumberOfUsers();
+
+    List<User> getAllAvailableUsers(String id);
+
+    String getCurrentUserId();
 
     User getUserById(String id);
 

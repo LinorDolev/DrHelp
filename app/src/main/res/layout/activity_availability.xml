@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".ui.AvailabilityActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+        <!--  Header -->
+        <include layout="@layout/header_logo_bar"></include>
+
+        <!-- Footer -->
+        <include layout="@layout/footer_logo_bar"></include>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/header"
+            android:layout_marginTop="40dp"
+            android:padding="10dip"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.SwitchCompat
+                android:id="@+id/status_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dip"
+                android:theme="@style/AppTheme" />
+
+            <TextView
+                android:id="@+id/user_status_textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:layout_marginTop="30dip"
+                android:clickable="false"/>
+
+            <TextView
+                android:id="@+id/contact_list_textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="100dip"
+                android:layout_marginBottom="10dip"
+                android:text="@string/contactList"
+                android:textSize="15sp"
+                android:clickable="true"/>
+
+
+
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

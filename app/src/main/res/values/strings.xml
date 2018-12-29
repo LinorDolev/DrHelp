@@ -13,4 +13,5 @@
     <string name="forgotPassword">Forgot your Password?</string>
     <string name="forgotPassword_label">We just need your registered Email Id to sent you password reset instructions.</string>
     <string name="resetPassword">Reset Password</string>
+    <string name="contactList">Click here to see the contact list</string>
 </resources>

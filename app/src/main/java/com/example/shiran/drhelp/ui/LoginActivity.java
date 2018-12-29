@@ -24,10 +24,6 @@ public class LoginActivity extends AppCompatActivity implements UserLoginObserve
     private TextView textView_toRegister;
     private MaterialButton button_login;
 
-    private Intent intent_toRegister;
-    private Intent intent_toMember;
-    private Intent intent_toResetPassword;
-
     private UserService userService;
 
     @Override
@@ -54,7 +50,7 @@ public class LoginActivity extends AppCompatActivity implements UserLoginObserve
     }
 
     private void onNeedToRegisterPressed(View view) {
-        intent_toRegister = new Intent(getApplicationContext(), RegistrationActivity.class);
+        Intent intent_toRegister = new Intent(getApplicationContext(), RegistrationActivity.class);
         startActivity(intent_toRegister);
     }
 
@@ -69,7 +65,7 @@ public class LoginActivity extends AppCompatActivity implements UserLoginObserve
     }
 
     private void onForgotMyPasswordButtonPressed(View view) {
-        intent_toResetPassword = new Intent(getApplicationContext(), ResetPasswordActivity.class);
+        Intent intent_toResetPassword = new Intent(getApplicationContext(), ResetPasswordActivity.class);
         startActivity(intent_toResetPassword);
     }
 
@@ -87,7 +83,7 @@ public class LoginActivity extends AppCompatActivity implements UserLoginObserve
 
     @Override
     public void onLoginSucceed() {
-        intent_toMember = new Intent(getApplicationContext(), MemberActivity.class);
+        Intent intent_toMember = new Intent(getApplicationContext(), AvailabilityActivity.class);
         startActivity(intent_toMember);
         Log.d("login:", "Authentication succeeded.");
         finish();
