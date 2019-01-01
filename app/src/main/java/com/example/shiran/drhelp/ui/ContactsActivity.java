@@ -15,23 +15,27 @@ import com.example.shiran.drhelp.R;
 import com.example.shiran.drhelp.entities.User;
 import com.example.shiran.drhelp.services.FirebaseUserService;
 import com.example.shiran.drhelp.services.UserService;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ContactsActivity extends AppCompatActivity {
 
-    //private LinearLayoutManager layoutManager;
     private UserService userService;
     private List<User> userList;
     private RecyclerView recyclerView;
     private UserAdapter userAdapter;
+    private FirebaseFirestore firestore;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts);
 
         userService = FirebaseUserService.getInstance();
+        firestore = FirebaseFirestore.getInstance();
         recyclerView = findViewById(R.id.recycler_view);
 
         showContactList();

@@ -35,7 +35,7 @@ public class FirebaseUserService extends UserServiceObservable {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("users");
         firebaseAuth = FirebaseAuth.getInstance();
-        currentUserId = firebaseAuth.getCurrentUser().getUid();
+        //currentUserId = firebaseAuth.getCurrentUser().getUid();
     }
 
     /** Singleton **/
@@ -138,13 +138,14 @@ public class FirebaseUserService extends UserServiceObservable {
 
     @Override
     public String getUserStatuse() {
+        currentUserId = firebaseAuth.getCurrentUser().getUid();
         return
                 databaseReference.child(currentUserId).child("available").getKey();
     }
 
     @Override
     public void setUserStatuse(boolean available) {
-
+        currentUserId = firebaseAuth.getCurrentUser().getUid();
         databaseReference.child(currentUserId).child("available").setValue(available);
     }
 
@@ -183,5 +184,10 @@ public class FirebaseUserService extends UserServiceObservable {
     public String getCurrentUserId() {
         return
                 firebaseAuth.getCurrentUser().getUid();
+    }
+
+    @Override
+    public String getCurrentUserName() {
+        return firebaseAuth.getCurrentUser().getDisplayName();
     }
 }

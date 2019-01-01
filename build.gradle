@@ -22,6 +22,11 @@ allprojects {
     repositories {
         google()
         jcenter()
+
+        /**TokBox**/
+        maven { url 'https://maven.google.com' }
+        maven { url 'https://tokbox.bintray.com/maven' }
+
     }
 }
 

@@ -1,6 +1,7 @@
 package com.example.shiran.drhelp.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -38,6 +39,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         User user = userList.get(i);
         userViewHolder.textView_userName
                 .setText(user.getFirstName() + " " + user.getLastName());
+        userViewHolder.imageView_call.setOnClickListener(this::onCallButtonPressed);
+    }
+
+    private void onCallButtonPressed(View view) {
+        Intent to_videoCaht_Intent = new Intent(this.context, VideoChatActivity.class);
+        this.context.startActivity(to_videoCaht_Intent);
     }
 
     @Override
@@ -49,11 +56,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
         TextView textView_userName;
         ImageView imageView_user;
+        ImageView imageView_call;
 
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);
             textView_userName = itemView.findViewById(R.id.user_info_textView);
             imageView_user = itemView.findViewById(R.id.user_imageView);
+            imageView_call = itemView.findViewById(R.id.call_imageView);
         }
     }
 }

@@ -39,6 +39,7 @@ public class LoginActivity extends AppCompatActivity implements UserLoginObserve
         textView_toRegister.setOnClickListener(this::onNeedToRegisterPressed);
         button_login.setOnClickListener(this::onLoginButtonPressed);
         textView_forgotMyPassword.setOnClickListener(this::onForgotMyPasswordButtonPressed);
+
     }
 
     private void initLoginReferences() {
@@ -96,4 +97,5 @@ public class LoginActivity extends AppCompatActivity implements UserLoginObserve
                 , Toast.LENGTH_SHORT).show();
         Log.d("login:", "Authentication failed.");
     }
+
 }

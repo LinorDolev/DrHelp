@@ -35,6 +35,8 @@ public interface UserService {
 
     String getCurrentUserId();
 
+    String getCurrentUserName();
+
     User getUserById(String id);
 
     User getUserByEmail(String email);
